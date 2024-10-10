@@ -23,6 +23,8 @@ def agregar_donacion():
     if request.method == "POST":
         nombre = request.form.get('user-nombre')
         print(nombre)
+        img00 = request.form.get('file-input-0-0')
+        print(img00)
     return render_template('agregar_donacion.html')
 
 @app.route('/ver_dispositivos')
