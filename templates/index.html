@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Index Page
+{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Index Page!</h1>
+<p>This is the main landing page of your Flask application.</p>
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

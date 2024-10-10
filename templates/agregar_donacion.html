@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Agregar Donacion
+{% endblock %}
+
+
+{% block content %}
+<form id="form" method="post" action="{{url_for('agregar_donacion')}}">
+    <div class="form-group">
+        <div id="error-message-div-usr" class="error-message-div" style="display:none">
+            <ul id="error-message-list-usr" class="error-message-list">
+            </ul>
+        </div>
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" maxlength="80" size="80" id="nombre" name="user-nombre" placeholder="Ingrese su nombre">
+        </div>
+
+        <div>
+            <label for="mail">E-Mail</label>
+            <input type="text" maxlength="30" size="30" id="mail" name="user-mail" placeholder="Ingrese su correo">
+        </div>
+
+        <div>
+            <label for="celular">Celular</label>
+            <input type="tel" id="celular" size="15" name="user-celular" placeholder="Celular: X XXXX XXXX">
+        </div>
+
+        <div>
+            <label for="region">Región</label>
+            <select id="region" name="user-region" onchange="setComunasButton()">
+                <option value="" disabled selected>Selecciona Una Región</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="comuna">Comuna</label>
+            <select id="comuna" name="user-comuna">
+            </select>
+        </div>
+        <button type="submit"> aaaa </button>
+    </div>
+
+    <div id="contenedor-dispositivos" class="container" nombre="container">
+        <div class="header">
+            <h3>
+                Info Dispositivos
+            </h3>
+        </div>
+        <div nombre="dispositivo-0" class="dispositivo form-group">
+        </div>
+    </div>
+
+    <div name="button-row">
+        <button id="button-agregar" type="button" class="button-add">Agregar otro dispositivo a esta donación</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/add_disp_field.js') }}"></script>
+<script src="{{ url_for('static', filename='js/agregar_donacion.js') }}"></script>
+{% endblock %}
