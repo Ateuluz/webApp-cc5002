@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById("button-agregar").addEventListener("click", agregarOpcionesDispositivo)
 
-let dispCount = 1;
+let dispCount = 0;
 
 function agregarOpcionesDispositivo() {
     console.log(dispCount);
 
-    typeOptionList = [
+    let typeOptionList = [
         "Pantalla",
         "Notebook",
         "Tablet",
@@ -22,7 +22,7 @@ function agregarOpcionesDispositivo() {
         "Otro",
     ]
     
-    stateOptionList = [
+    let stateOptionList = [
         "Funciona perfecto",
         "Funciona a medias",
         "No Funciona",
@@ -59,43 +59,22 @@ function agregarOpcionesDispositivo() {
     descriptionLabel.textContent = 'Descripción:';
     
     const descriptionTA = document.createElement('textarea');
-    // descriptionTA.id = `descripcion-${dispCount}`;
     descriptionTA.classList.add("descripcion");
     descriptionTA.setAttribute('id', `descripcion-${dispCount}`);
-    descriptionTA.setAttribute('name', 'descripcion');
+    descriptionTA.setAttribute('name', `descripcion-${dispCount}`);
     descriptionTA.setAttribute('rows','4');
     descriptionTA.setAttribute('cols','50');
     descriptionTA.setAttribute('placeholder','Ingrese Descripción');
     descriptionTA.setAttribute('oninput','enforceLimits(this)');
     
-    const descriptionJS = document.createElement('script');
-    descriptionJS.textContent = `
-        function enforceLimits(textarea) {
-            const maxLines = textarea.rows;
-            const maxColumns = textarea.cols;
-            const lines = textarea.value.split('\n');
-            
-            for (let i = 0; i < lines.length; i++) {
-                if (lines[i].length > maxColumns) {
-                    lines[i] = lines[i].slice(0, maxColumns);
-                }
-            }
-
-            if (lines.length > maxLines) {
-                textarea.value = lines.slice(0, maxLines).join('\n');
-            } else {
-                textarea.value = lines.join('\n');
-            }
-        }
-    `;
-    
     const typeLabel = document.createElement('label');
-    typeLabel.setAttribute('for', `tipo ${dispCount}`);
+    typeLabel.setAttribute('for', `tipo-${dispCount}`);
     typeLabel.textContent = 'Tipo:';
-    
     
     const typeSelect = document.createElement('select');
     typeSelect.classList.add("tipo");
+    typeSelect.setAttribute("id", `tipo-${dispCount}`);
+    typeSelect.setAttribute("name", `tipo-${dispCount}`);
     const tpsoption0 = document.createElement('option');
     tpsoption0.textContent = 'Selecciona un tipo';
     tpsoption0.value = "";
@@ -112,15 +91,19 @@ function agregarOpcionesDispositivo() {
     const anhosUso = document.createElement('label');
     anhosUso.textContent = 'Años de uso:';
     const anhosInput = document.createElement('input');
+    anhosInput.setAttribute("id", `anhos-${dispCount}`);
+    anhosInput.setAttribute("name", `anhos-${dispCount}`);
     anhosInput.type = 'text';
     anhosInput.setAttribute('maxlength', '2');
     anhosInput.setAttribute('size', '3');
-    anhosInput.classList.add("anhos")
+    anhosInput.classList.add("anhos");
     
     const stateLabel = document.createElement('label');
     stateLabel.textContent = 'Estado funcionamiento:';
     const stateSelect = document.createElement('select');
-    stateSelect.classList.add("estado")
+    stateSelect.classList.add("estado");
+    stateSelect.setAttribute("id", `estado-${dispCount}`);
+    stateSelect.setAttribute("name", `estado-${dispCount}`);
     
     const nullStateOption = document.createElement("option");
     nullStateOption.value = "";
@@ -137,14 +120,12 @@ function agregarOpcionesDispositivo() {
     
     const fotoLabel = document.createElement('label');
     fotoLabel.textContent = 'Fotos del producto:';
-    console.log("Here");
     
     dispositivo.appendChild(errorMessageDiv);
     dispositivo.appendChild(dispositivoNombreLabel);
     dispositivo.appendChild(dispositivoNombreInput);
     dispositivo.appendChild(descriptionLabel);
     dispositivo.appendChild(descriptionTA);
-    dispositivo.appendChild(descriptionJS);
     dispositivo.appendChild(typeLabel);
     dispositivo.appendChild(typeSelect);
     dispositivo.appendChild(anhosUso);
@@ -156,7 +137,8 @@ function agregarOpcionesDispositivo() {
         const fotoInput = document.createElement('input');
         const fotoLabel = document.createElement('label');
         fotoInput.type = 'file';
-        fotoInput.id = "file-input-" + (dispCount*3 + i);
+        fotoInput.id = "file-input-" + i + "-" + dispCount; // + (dispCount*3 + i);
+        fotoInput.name = "file-input-" + i + "-" + dispCount;
         fotoInput.classList.add("file-input");
         fotoInput.accept = ".jpg, .jpeg, .png, .gif";
         fotoLabel.setAttribute('for', fotoInput.id);
@@ -190,3 +172,21 @@ function agregarOpcionesDispositivo() {
     
     dispCount++;
 };
+
+function enforceLimits(textarea) {
+    const maxLines = textarea.rows;
+    const maxColumns = textarea.cols;
+    const lines = textarea.value.split('\n');
+    
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].length > maxColumns) {
+            lines[i] = lines[i].slice(0, maxColumns);
+        }
+    }
+
+    if (lines.length > maxLines) {
+        textarea.value = lines.slice(0, maxLines).join('\n');
+    } else {
+        textarea.value = lines.join('\n');
+    }
+}
