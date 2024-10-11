@@ -107,11 +107,12 @@ def validate_region_comuna(region_name, comuna_name):
     cursor.execute(query_region, (region_name,))
     region = cursor.fetchone()
     
+    print(QUERY_DICT["validate_region"])
     print(region, region_name, comuna_name)
 
     if region:
         query_comuna = QUERY_DICT["validate_comuna"]
-        cursor.execute(query_comuna, (comuna_name, region[0]))
+        cursor.execute(query_comuna, (comuna_name, region['id']))
         comuna = cursor.fetchone()
         cursor.close()
         conn.close()
