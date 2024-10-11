@@ -18,4 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         this.value = formattedValue;
     });
+
+    // let volverBtn = document.getElementById("volver");
+    // if (volverBtn) {
+    //     volverBtn.addEventListener("click", volver);
+    // }
+
+    // let volverBtnL = document.getElementById("last-volver");
+    // if (volverBtnL) {
+    //     volverBtnL.addEventListener("click", volver);
+    // }
 });
+

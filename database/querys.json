@@ -1,6 +1,8 @@
-    {
-        "get_dispositivos": "SELECT d.tipo, d.nombre, d.estado, cm.nombre AS comuna_name FROM dispositivo d JOIN contacto c ON d.contacto_id = c.id JOIN comuna cm ON c.comuna_id = cm.id",
-        "add_dispositivo": "INSERT INTO dispositivo (contacto_id, nombre, descripcion, tipo, anos_uso, estado) VALUES (%s, %s, %s, %s, %s, %s) ",
-        "add_archivo": "INSERT INTO archivo (ruta_archivo, nombre_archivo, dispositivo_id) VALUES (%s, %s, %s) ",
-        "add_comentario": "INSERT INTO comentario (nombre, texto, fecha, dispositivo_id) VALUES (%s, %s, %s, %s) "
-    }
+{
+    "get_dispositivos": "SELECT d.tipo, d.nombre, d.estado, cm.nombre AS comuna_name FROM dispositivo d JOIN contacto c ON d.contacto_id = c.id JOIN comuna cm ON c.comuna_id = cm.id",
+    "add_dispositivo": "INSERT INTO dispositivo (contacto_id, nombre, descripcion, tipo, anos_uso, estado) VALUES (%s, %s, %s, %s, %s, %s) ",
+    "add_archivo": "INSERT INTO archivo (ruta_archivo, nombre_archivo, dispositivo_id) VALUES (%s, %s, %s) ",
+    "add_comentario": "INSERT INTO comentario (nombre, texto, fecha, dispositivo_id) VALUES (%s, %s, %s, %s) ",
+    "validate_region": "SELECT id FROM region WHERE nombre = %s",
+    "validate_comuna": "SELECT id FROM comuna WHERE nombre = %s AND region_id = %s"
+}

@@ -8,7 +8,7 @@ import os
 
 import re
 
-from utils.retrieve import retrieve_numbers
+from utils.retrieve import *
 
 UPLOAD_FOLDER = 'static/uploads'
 
@@ -32,6 +32,16 @@ def agregar_donacion():
         
         results = retrieve_ids()
         print(results.keys())
+        
+        contacto_info = retrieve_contacto()
+        if not contacto_info:
+            print("my bad bro")
+            return render_template('agregar_donacion.html')
+        
+        print("good job")
+        
+        for id in results.keys():
+            print(retrieve_dispositivo())
         
     return render_template('agregar_donacion.html')
 

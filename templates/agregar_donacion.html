@@ -59,6 +59,8 @@ Agregar Donacion
 {% endblock %}
 
 {% block javascript %}
+<script src="{{ url_for('static', filename='js/validations.js') }}"></script>
+<script src="{{ url_for('static', filename='js/set_selects.js') }}"></script>
 <script src="{{ url_for('static', filename='js/add_disp_field.js') }}"></script>
 <script src="{{ url_for('static', filename='js/agregar_donacion.js') }}"></script>
 {% endblock %}
