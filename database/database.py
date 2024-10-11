@@ -25,16 +25,15 @@ def getDispositivos(idx, l):
     cursor.close()  # Close the cursor
     return dispositivos
 
-def fetchDevices():
+def getDispositivo(idx):
     conn = getConnection()
-    if conn is None:
-        return []
-
-    try:
-        dispositivos = getDispositivos()
-        return dispositivos
-    finally:
-        conn.close()  # Close the connection here
+    cursor = conn.cursor()
+    # query = QUERY_DICT["get_dispositivos"]
+    query = QUERY_DICT["get_dispositivos_u"]
+    cursor.execute(query, (idx,))
+    dispositivos = cursor.fetchall()  # Store the result in a variable
+    cursor.close()  # Close the cursor
+    return dispositivos
         
 def addDispositivo(contacto_id, nombre_disp, descripcion, tipo, anos_uso, estado, archivos):
     """ dispositivo -> id:int, contacto_id:int, nombre:varchar(80), descripcion:varchar(300), tipo:enum(...), anos_uso:int, estado:enum(...) """

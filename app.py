@@ -105,17 +105,19 @@ def ver_dispositivos(page):
         }
         data.append(d)
     
+    nend = len(dispositivos) != 0
     
-    return render_template('ver_dispositivos.html', dispositivos=data)
+    return render_template('ver_dispositivos.html', page=int(page), dispositivos=data, nend=nend)
 
-@app.route('/info_dispositivo/<id>', methods=['POST', 'GET'])
-def info_dispositivo(id):
+@app.route('/informacion_dispositivo/<idx>', methods=['POST', 'GET'])
+def informacion_dispositivo(idx):
     
     if request.method == 'POST':
-        pass
+        return redirect(url_for("informacion_dispositivo", idx=idx))
     else:
-        dispositivo = db.getDispositivo(id)
-        
+        dispositivo = db.getDispositivo(idx)
+    
+    return render_template("informacion_dispositivo.html")
     
 
 if __name__ == '__main__':

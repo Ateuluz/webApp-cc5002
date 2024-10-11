@@ -22,7 +22,7 @@ Ver Dispositivos
     <tbody id="device-table-body">
         {% if dispositivos %}
         {% for dispositivo in dispositivos %}
-        <tr id="view_row_{{ dispositivo['id'] }}" href="{{ url_for('info_dispositivo', id=dispositivo['id']) }}">
+        <tr id="view_row_{{ dispositivo['id'] }}" data-href="{{ url_for('informacion_dispositivo', idx=dispositivo['id']) }}">
             <td>{{ dispositivo['tipo'] }}</td>
             <td>{{ dispositivo['nombre'] }}</td>
             <td>{{ dispositivo['estado'] }}</td>
@@ -41,7 +41,18 @@ Ver Dispositivos
         </tr> -->
     </tbody>
 </table>
+
+<div class="button-row">
+    {% if page > 0 %}
+        <a href="{{ url_for('ver_dispositivos', page=(page-1)) }}" class="buttons">anterior</a>
+    {% endif %}
+    
+    {% if nend %}
+        <a href="{{ url_for('ver_dispositivos', page=(page+1)) }}" class="buttons">siguiente</a>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block javascript %}
+<script src="{{ url_for('static', filename='js/ver_dispositivos.js') }}"></script>
 {% endblock %}
