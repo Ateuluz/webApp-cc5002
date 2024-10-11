@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ver Dispositivos
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ver_dispositivos.css') }}">
+{% endblock %}
+
+{% block content %}
+<table id="device-table">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Nombre Dispositivo</th>
+            <th>Estado</th>
+            <th>Comuna</th>
+            <th>Fotos</th>
+        </tr>
+    </thead>
+    <tbody id="device-table-body">
+        {% if dispositivos %}
+        {% for dispositivo in dispositivos %}
+        <tr id="view_row_{{ dispositivo['id'] }}" href="{{ url_for('info_dispositivo', id=dispositivo['id']) }}">
+            <td>{{ dispositivo['tipo'] }}</td>
+            <td>{{ dispositivo['nombre'] }}</td>
+            <td>{{ dispositivo['estado'] }}</td>
+            <td>{{ dispositivo['comuna_name'] }}</td>
+            <td><img src="{{ url_for('static', filename=dispositivo['path']) }}" alt="imagen dispositivo" width="120" height="120"></td>
+        </tr>
+        {% endfor %}
+        {% endif  %}
+
+        <!-- <tr data-device-id="1">
+            <td>Type A</td>
+            <td>Device 1</td>
+            <td>Active</td>
+            <td>Comuna 1</td>
+            <td><img src="image1-thumb.jpg" alt="Device 1" class="thumbnail"></td>
+        </tr> -->
+    </tbody>
+</table>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

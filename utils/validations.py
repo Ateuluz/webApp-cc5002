@@ -81,7 +81,7 @@ def validate_tipo(tipo):
 
 
 def validate_anos(anos):
-    return 1 <= anos <= 99
+    return 1 <= int(anos) <= 99
 
 
 def validate_mail(mail):

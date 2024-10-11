@@ -38,19 +38,85 @@ def agregar_donacion():
             print("my bad bro")
             return render_template('agregar_donacion.html')
         
-        print("good job")
+        contact_id = db.getContactoID(contacto_info["mail"])
+        
+        if contact_id is None:
+            
+            print("Adding contact")
+            
+            ci = contacto_info
+            print(db.getComunaID(ci["comuna"], ci["region"]))
+            db.addContacto(ci["nombre"],ci["mail"],ci["celular"],db.getComunaID(ci["comuna"], ci["region"]))
+            
+            contact_id = db.getContactoID(contacto_info["mail"])
+        
+        else:
+            
+            print("==> HELLO!!")
         
         for id in results.keys():
             print(retrieve_dispositivo(id))
+            print("Uploads: ", retrieve_uploads(id))
+            archivos = retrieve_uploads(id)
+            parchivs = []
+            
+            for archivo in archivos:
+                filename = hashlib.sha256(
+                secure_filename(archivo.filename) # nombre del archivo
+                .encode("utf-8") # encodear a bytes
+                ).hexdigest()
+                
+                extension = filetype.guess(archivo).extension
+                
+                img_filename = f"{filename}.{extension}"
+                
+                archivo.save(os.path.join(app.config["UPLOAD_FOLDER"], img_filename))
+                
+                parchivs.append((img_filename, archivo.filename))
+            
+            db.addDispositivo(contact_id, **retrieve_dispositivo(id), archivos=parchivs)
+            
+            
         
-        return render_template('agregar_donacion.html', saludo="Skibidi")
+        return render_template('agregar_donacion.html')
         
     return render_template('agregar_donacion.html')
 
-@app.route('/ver_dispositivos')
-def ver_dispositivos():
-    dispositivos = []
-    return render_template('ver_dispositivos.html', dispositivos=dispositivos)
+@app.route('/ver_dispositivos/<page>')
+def ver_dispositivos(page):
+    #TODO num
+    dispositivos = db.getDispositivos(int(page)*5,5)
+    
+    data = []
+    
+    for i,disp in enumerate(dispositivos):
+        """ tipo; nombre_disp; estado; foto """
+        
+        ruta = db.getFileName(disp["id"])[0]['ruta_archivo']
+        print(">>> Archivo on Ver_disp:", ruta)
+        
+        d = {
+            "id": disp["id"],
+            "nombre": disp["nombre"],
+            "estado": disp["estado"],
+            "tipo": disp["tipo"],
+            "comuna_name": disp["comuna_name"],
+            "path": f"uploads/{ruta}",
+        }
+        data.append(d)
+    
+    
+    return render_template('ver_dispositivos.html', dispositivos=data)
+
+@app.route('/info_dispositivo/<id>', methods=['POST', 'GET'])
+def info_dispositivo(id):
+    
+    if request.method == 'POST':
+        pass
+    else:
+        dispositivo = db.getDispositivo(id)
+        
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

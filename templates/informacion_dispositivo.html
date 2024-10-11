@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Informacion Dispositivo
+{% endblock %}
+
+
+{% block content %}
+<div id="container" class="main-container">
+    <div id="device-info">
+        <!-- Information about the device will be inserted here -->
+    </div>
+    <div id="new-comment-input-section">
+        <div><h3 class="header">Nuevo Comentario</h3></div>
+        <div><input id="name-comment-input" class="comment-input" placeholder="Nombre"></div>
+        <div><textarea id="comment-input" placeholder="Escribe tu comentario acá..." rows="4" cols="50" class="comment-input"></textarea></div>
+    </div>        
+    <div id="button-row">
+        <button id="comment" class="btn">Comentar</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

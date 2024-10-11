@@ -1,0 +1,69 @@
+/* Header */
+.header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+/* Basic styling for the table */
+#device-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+#device-table th, #device-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#device-table th {
+    background-color: #f4f4f4;
+}
+
+#device-table td {
+    cursor: pointer;
+}
+
+/* Style for thumbnail images */
+.thumbnail {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+/* Style for table rows on hover */
+#device-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styles */
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; 
+    gap: 10px; 
+    margin-top: 20px;
+}

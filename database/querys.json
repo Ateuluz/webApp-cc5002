@@ -3,6 +3,12 @@
     "add_dispositivo": "INSERT INTO dispositivo (contacto_id, nombre, descripcion, tipo, anos_uso, estado) VALUES (%s, %s, %s, %s, %s, %s) ",
     "add_archivo": "INSERT INTO archivo (ruta_archivo, nombre_archivo, dispositivo_id) VALUES (%s, %s, %s) ",
     "add_comentario": "INSERT INTO comentario (nombre, texto, fecha, dispositivo_id) VALUES (%s, %s, %s, %s) ",
+    "get_contact": "SELECT id FROM contacto WHERE email = %s",
+    "add_contact": "INSERT INTO contacto (nombre, email, celular, comuna_id, fecha_creacion) VALUES (%s, %s, %s, %s, %s)",
     "validate_region": "SELECT id FROM region WHERE nombre = %s",
-    "validate_comuna": "SELECT id FROM comuna WHERE nombre = %s AND region_id = %s"
+    "validate_comuna": "SELECT id FROM comuna WHERE nombre = %s AND region_id = %s",
+    "get_comuna_by_name_x": "SELECT c.id FROM comuna c JOIN region r ON r.id = c.region_id WHERE c.nombre = %s AND r.nombre = %s",
+    "get_comuna_by_name": "SELECT id FROM comuna WHERE nombre = %s",
+    "get_dispositivos_n": "SELECT d.id, d.tipo, d.nombre, d.estado, cm.nombre AS comuna_name FROM dispositivo d JOIN contacto c ON d.contacto_id = c.id JOIN comuna cm ON c.comuna_id = cm.id ORDER BY d.id DESC LIMIT ",
+    "get_dispositivos_u": "SELECT d.tipo, d.nombre, d.estado, cm.nombre AS comuna_name FROM dispositivo d JOIN contacto c ON d.contacto_id = c.id JOIN comuna cm ON c.comuna_id = cm.id WHERE d.id = %s "
 }
