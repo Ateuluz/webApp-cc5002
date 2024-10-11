@@ -6,6 +6,10 @@ import hashlib
 import filetype
 import os
 
+import re
+
+from utils.retrieve import retrieve_numbers
+
 UPLOAD_FOLDER = 'static/uploads'
 
 app = Flask(__name__)
@@ -25,6 +29,10 @@ def agregar_donacion():
         print(nombre)
         img00 = request.form.get('file-input-0-0')
         print(img00)
+        
+        results = retrieve_ids()
+        print(results.keys())
+        
     return render_template('agregar_donacion.html')
 
 @app.route('/ver_dispositivos')

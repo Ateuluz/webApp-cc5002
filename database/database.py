@@ -34,7 +34,7 @@ def fetchDevices():
     finally:
         conn.close()  # Close the connection here
         
-def addDispositivo(contacto_id, nombre_disp, descripcion, tipo, anos_uso, estado, archivos):
+def addDispositivo(contacto_mail, nombre_disp, descripcion, tipo, anos_uso, estado, archivos):
     """ dispositivo -> id:int, contacto_id:int, nombre:varchar(80), descripcion:varchar(300), tipo:enum(...), anos_uso:int, estado:enum(...) """
     """ contacto    -> id:int, nombre:varchar(80), email:varchar(30), celular:varchar(15), comuna_id:int, fecha_creacion:datetime """
     """ archivo     -> id:int, ruta_archivo:varchar(300), nombre_archivo:varchar(300), dispositivo_id:int """
@@ -43,21 +43,17 @@ def addDispositivo(contacto_id, nombre_disp, descripcion, tipo, anos_uso, estado
     """ region      -> id:int, nombre:varchar(200) """
     conn = getConnection()
     try:
-        # Get the cursor and start transaction
+        
         cursor = conn.cursor()
 
-        # Insert dispositivo
         cursor.execute(QUERY_DICT["add_dispositivo"], (contacto_id, nombre_disp, descripcion, tipo, anos_uso, estado))
         
-        # Get the last inserted dispositivo_id
         dispositivo_id = cursor.lastrowid
 
-        # Insert each archivo linked to the dispositivo
         for archivo in archivos:
             ruta_archivo, nombre_archivo = archivo
             cursor.execute(QUERY_DICT["add_archivo"], (ruta_archivo, nombre_archivo, dispositivo_id))
 
-        # Commit transaction
         conn.commit()
 
     except Exception as e:
