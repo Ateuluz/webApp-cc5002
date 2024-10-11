@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    agregarOpcionesDispositivo();
+    // document.getElementById("remove-0").style.display = "none";
+    document.getElementById("remove-0").remove();
 });
 
 document.getElementById("button-agregar").addEventListener("click", agregarOpcionesDispositivo)
@@ -29,6 +32,7 @@ function agregarOpcionesDispositivo() {
     ]
     
     const dispositivo = document.createElement('div');
+    dispositivo.id = dispCount;
     dispositivo.className = "dispositivo";
     dispositivo.classList.add("dispositivo");
     dispositivo.classList.add("form-group");
@@ -36,11 +40,13 @@ function agregarOpcionesDispositivo() {
     const errorMessageDiv = document.createElement('div');
     errorMessageDiv.id = `error-message-div-${dispCount}`;
     errorMessageDiv.className = "error-message-div";
+    errorMessageDiv.classList.add("error-message-div");
     errorMessageDiv.style.display = 'none';
     
     const errorMessageList = document.createElement('ul');
     errorMessageList.id = `error-message-list-${dispCount}`
     errorMessageList.className = "error-message-list";
+    errorMessageList.classList.add("error-message-list");
     errorMessageDiv.appendChild(errorMessageList);
     
     const dispositivoNombreLabel = document.createElement('label');
@@ -161,6 +167,7 @@ function agregarOpcionesDispositivo() {
 
     
     const remove = document.createElement('button');
+    remove.id = "remove-"+dispCount;
     remove.classList.add("button");
     remove.textContent = 'Eliminar dispositivo';
     remove.onclick = function(){

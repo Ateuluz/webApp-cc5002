@@ -41,7 +41,9 @@ def agregar_donacion():
         print("good job")
         
         for id in results.keys():
-            print(retrieve_dispositivo())
+            print(retrieve_dispositivo(id))
+        
+        return render_template('agregar_donacion.html', saludo="Skibidi")
         
     return render_template('agregar_donacion.html')
 

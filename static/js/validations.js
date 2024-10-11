@@ -15,13 +15,11 @@ function addMessage(holder_list_id, message) {
 }
 
 
-function validarForm(event) {
-    console.log("prev");
-    event.preventDefault();
+function validarForm() {
+    // event.preventDefault();
     let valid = true;
     const validDonante      = validarDonante();
     const validDispositivos = validarDispositivos();
-    console.log("post");
     if (!validDonante) {
         valid = false;
     }
@@ -106,10 +104,13 @@ function validarDonante() {
 
 // TODO
 function validarDispositivos() {
+
+    console.log(document.querySelectorAll(".error-message-div")); // Check if it's present
+
     let valid = true;
     const dispositivos = document.querySelectorAll("#contenedor-dispositivos .dispositivo");
     dispositivos.forEach(disp => {
-        
+
         const divError = disp.querySelector(".error-message-div");
         const listError = divError.querySelector(".error-message-list");
         removeMessages(listError.id);
@@ -120,11 +121,10 @@ function validarDispositivos() {
         const inputAnhos  = disp.querySelector("input.anhos");
         const selectState = disp.querySelector("select.estado");
         const inputsImgs  = disp.querySelectorAll("input.file-input");
+
         
         const validNombre = dispValidarNombre(inputNombre.value);
-        console.log("Prev");
         const validType = dispValidarType(selectType.value);
-        console.log("Post");
         const validAnhos = dispValidarAnhos(inputAnhos.value);
         const validState = dispValidarState(selectState.value);
         const validImgs = dispValidarImgs(inputsImgs); 

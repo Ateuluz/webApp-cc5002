@@ -47,15 +47,28 @@ Agregar Donacion
                 Info Dispositivos
             </h3>
         </div>
-        <div nombre="dispositivo-0" class="dispositivo form-group">
-        </div>
     </div>
 
     <div name="button-row">
         <button id="button-agregar" type="button" class="button-add">Agregar otro dispositivo a esta donación</button>
-        <button type="submit"> aaaa </button>
+        <button id="button-submit" type="button" class="button-submit">Publicar esta donación</button>
+    </div>
+
+    <div id="customModal" class="modal" style="display: none">
+        <div class="modal-content">
+            <p>Are you sure you want to send the form?</p>
+            <button type="submit" id="confirmButton" onclick="myConfirmSubmit()">Sí, confirmo</button>
+            <button type="button" id="cancelButton" onclick="myCancelSubmit()">No, quiero volver al formulario</button>
+        </div>
     </div>
 </form>
+
+<div id="lastStep" style="display: none">
+    <div class="last-step-modal-content">
+        <p>¡Listo! Tu donación ha sido publicada exitosamente.</p>
+        <a href="{{ url_for('index') }}" class="button-return">Volver</a>
+    </div>
+</div>
 {% endblock %}
 
 {% block javascript %}
@@ -63,4 +76,5 @@ Agregar Donacion
 <script src="{{ url_for('static', filename='js/set_selects.js') }}"></script>
 <script src="{{ url_for('static', filename='js/add_disp_field.js') }}"></script>
 <script src="{{ url_for('static', filename='js/agregar_donacion.js') }}"></script>
+<script src="{{ url_for('static', filename='js/submit_process.js') }}"></script>
 {% endblock %}
