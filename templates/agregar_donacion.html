@@ -4,6 +4,9 @@
 Agregar Donacion
 {% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agregar_donacion.css') }}">
+{% endblock %}
 
 {% block content %}
 <form id="form" method="post" action="{{url_for('agregar_donacion')}}">
@@ -50,8 +53,8 @@ Agregar Donacion
     </div>
 
     <div name="button-row">
-        <button id="button-agregar" type="button" class="button-add">Agregar otro dispositivo a esta donación</button>
-        <button id="button-submit" type="button" class="button-submit">Publicar esta donación</button>
+        <button id="button-agregar" type="button" class="button">Agregar otro dispositivo a esta donación</button>
+        <button id="button-submit" type="button" class="button">Publicar esta donación</button>
     </div>
 
     <div id="customModal" class="modal" style="display: none">

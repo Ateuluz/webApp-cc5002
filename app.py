@@ -112,12 +112,38 @@ def ver_dispositivos(page):
 @app.route('/informacion_dispositivo/<idx>', methods=['POST', 'GET'])
 def informacion_dispositivo(idx):
     
-    if request.method == 'POST':
-        return redirect(url_for("informacion_dispositivo", idx=idx))
-    else:
-        dispositivo = db.getDispositivo(idx)
+    info = db.getAllInfo(idx)
     
-    return render_template("informacion_dispositivo.html")
+    print(info)
+    
+    paths = db.getFileName(idx)
+    
+    print(paths)
+    
+    paths = [ f"uploads/{path['ruta_archivo']}" for path in paths]
+    
+    print(paths)
+    
+    comments = db.getComments(idx)
+    
+    print(comments)
+    
+    if request.method == 'POST':
+        
+        nombre = request.form.get("name-comment-input")
+        texto = request.form.get("comment-input")
+        
+        print("============================")
+        print(nombre)
+        print(texto)
+        
+        db.addComment(idx, nombre, texto)
+        
+        # return render_template("informacion_dispositivo.html", info=info, paths=paths, comments=comments)
+        return redirect(url_for("informacion_dispositivo", idx=idx))
+    
+
+    return render_template("informacion_dispositivo.html", info=info, paths=paths, comments=comments)
     
 
 if __name__ == '__main__':

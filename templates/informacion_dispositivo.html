@@ -4,22 +4,53 @@
 Informacion Dispositivo
 {% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/informacion_dispositivo.css') }}">
+{% endblock %}
 
 {% block content %}
 <div id="container" class="main-container">
     <div id="device-info">
-        <!-- Information about the device will be inserted here -->
+        {% if info %}
+        <h1 class="header">{{ info['nombre'] }}</h1>
+        <p><strong>Tipo:</strong>{{info['tipo']}}</p>
+        <p><strong>Descripción:</strong> {{info['descripcion']}}</p>
+        <p><strong>Años de uso:</strong> {{info['anos_uso']}}</p>
+        <p><strong>Estado:</strong> {{info['estado']}}</p>
+        <p><strong>Comuna:</strong> {{info['comuna_nombre']}}</p>
+        <p><strong>Región:</strong> {{info['region_nombre']}}</p>
+        <p><strong>Nombre del Donante:</strong> {{info['contacto_nombre']}}</p>
+        <p><strong>Email del Donante:</strong> {{info['email']}}</p>
+        <p><strong>Número Celular del Donante:</strong> {{info['celular']}}</p>
+        <div id="device-images">
+            {% for path in paths %}
+            <img src="{{ url_for('static', filename=path) }}" alt="{{ info['nombre'] }}" class="device-image" onclick="toggleImageSize(this)">
+            {% endfor %}
+        </div>
+        <h2 class="header">Comentarios</h2>
+        <ul id="comment-list">
+            {% for comment in comments %}
+            <li>
+                <p><strong>{{ comment['nombre'] }} ({{ comment['fecha'] }}):</strong></p>
+                <p>{{ comment['texto'] }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     </div>
-    <div id="new-comment-input-section">
-        <div><h3 class="header">Nuevo Comentario</h3></div>
-        <div><input id="name-comment-input" class="comment-input" placeholder="Nombre"></div>
-        <div><textarea id="comment-input" placeholder="Escribe tu comentario acá..." rows="4" cols="50" class="comment-input"></textarea></div>
-    </div>        
-    <div id="button-row">
-        <button id="comment" class="btn">Comentar</button>
-    </div>
+    <form id="form" method="POST" action="{{ url_for('informacion_dispositivo', idx=info['id']) }}">
+        <div id="new-comment-input-section">
+            <div><h3 class="header">Nuevo Comentario</h3></div>
+            <div><input id="name-comment-input" name="name-comment-input" class="comment-input" placeholder="Nombre"></div>
+            <div><textarea id="comment-input" name="comment-input" placeholder="Escribe tu comentario acá..." rows="4" cols="50" class="comment-input"></textarea></div>
+        </div>        
+        <div id="button-row">
+            <button id="comment-button" type="button" class="btn">Comentar</button>
+        </div>
+    </form>
 </div>
 {% endblock %}
 
 {% block javascript %}
+<script src="{{ url_for('static', filename='js/informacion_dispositivo.js') }}"></script>
 {% endblock %}

@@ -1,0 +1,358 @@
+.invalid-input {
+    background-color: #ffdddd;
+    border: 1px solid red;
+}
+
+/* General/Global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+/* Form */
+.form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: none;
+}
+
+.form-group input[type="file"] {
+    padding: 5px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #0066cc;
+    outline: none;
+}
+
+/* Yet to check */
+/* Validation Styles */
+/* .input-error {
+    border-color: #cc0000;
+    background-color: #ffeeee;
+}
+
+.input-error::placeholder {
+    color: #cc0000;
+    } */
+.invalid-input::placeholder {
+    color: #cc0000;
+    
+}
+
+/* Button Styles */
+.button {
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #004080;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Added distinction for dispositivos */
+.dispositivo {
+    border: 2px solid #007BFF;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.dispositivo legend {
+    color: #007BFF;
+}
+
+/* Custom Buttons */
+.custom-file-input {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    border: 1px solid #4CAF50;
+    font-size: 14px;
+}
+
+.custom-file-input:hover {
+    background-color: #2f6e30;
+    transition: background-color 0.3s ease;
+}
+
+.file-input {
+    display: none;
+}
+
+/* .file-input-filename {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    } */
+    
+.file-input-filename {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.file-input-filename:hover {
+    background-color: #e0e0e0;
+}
+
+.custom-file-input.invalid-input {
+    color: red;
+    font-weight: bold;
+    background-color: #ffdddd;
+    padding: 5px;
+    border-radius: 4px;
+    display: block; /* Ensure block display to accommodate styling */
+    border: 1px solid #fdb9b9;
+}
+
+.custom-file-input.invalid-input:hover {
+    background-color: #c5a1a1;
+    border: 1px solid #fea0a0;
+    transition: background-color 0.3s ease;
+}
+
+/* Last Buttons - Footer like */
+.button-row {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: 20px; 
+}
+
+.button-row button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.button-row button:hover {
+    transition: background-color 0.3s ease;
+}
+
+.button-add {
+    background-color: #28a745; 
+}
+.button-add:hover {
+    background-color: #208036; 
+}
+
+.button-return {
+    background-color: #007bff; 
+}
+.button-return:hover {
+    background-color: #0364cb; 
+}
+
+.button-submit {
+    background-color: #dc3545; 
+}
+.button-submit:hover {
+    background-color: #a82a37; 
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+#confirmButton {
+    background-color: #28a745;
+    color: white;
+}
+
+#cancelButton {
+    background-color: #dc3545;
+    color: white;
+}
+
+#confirmButton:hover, #cancelButton:hover {
+    filter: brightness(85%);
+}
+
+
+/* Modal Background */
+#lastStep {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Allow scrolling if needed */
+}
+
+/* Modal Content */
+.last-step-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.last-step-modal-content p {
+    margin-bottom: 10px;
+}
+
+/* Button Styling */
+.last-step-modal-content button, .last-step-modal-content a {
+    text-decoration: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    margin-top: 50px;
+    transition: background-color 0.3s ease;
+}
+
+/* Button Hover Effect */
+.last-step-modal-content button:hover, .last-step-modal-content a:hover {
+    background-color: #0056b3;
+}
+
+/* Error messages */
+/* Container for error messages */
+.error-message-div {
+    /* display: none; */
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* List of error messages */
+.error-message-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Individual error message */
+.error-message-list li {
+    color: #842029;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* Additional styling to enhance the appearance */
+.error-message-list li::before {
+    content: "⚠️ ";
+    font-size: 16px;
+    margin-right: 5px;
+}

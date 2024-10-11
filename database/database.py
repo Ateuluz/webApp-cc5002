@@ -39,7 +39,7 @@ def addDispositivo(contacto_id, nombre_disp, descripcion, tipo, anos_uso, estado
     """ dispositivo -> id:int, contacto_id:int, nombre:varchar(80), descripcion:varchar(300), tipo:enum(...), anos_uso:int, estado:enum(...) """
     """ contacto    -> id:int, nombre:varchar(80), email:varchar(30), celular:varchar(15), comuna_id:int, fecha_creacion:datetime """
     """ archivo     -> id:int, ruta_archivo:varchar(300), nombre_archivo:varchar(300), dispositivo_id:int """
-    """ comeentario -> id:int, nombre:varchar(80), texto:varchar(300), fecha:varchar(45), dispositivo_id:int """
+    """ comentario  -> id:int, nombre:varchar(80), texto:varchar(300), fecha:varchar(45), dispositivo_id:int """
     """ comuna      -> id:int, nombre:varchar(200), region_id:int """
     """ region      -> id:int, nombre:varchar(200) """
     conn = getConnection()
@@ -103,9 +103,27 @@ def getFileName(dispID):
     cursor.close()
     return archivos
 
+# TODO
 def getComments(id):
     conn = getConnection()
     cursor = conn.cursor()
-    
+    cursor.execute(QUERY_DICT["get_comments_for"], (id,))
+    comments = cursor.fetchall()
     cursor.close()
-    return 
+    return comments
+
+def getAllInfo(id):
+    """ d.id ; d.nombre ; d.tipo ; d.descripcion ; d.anos_uso ; d.estado ; com.nombre ; reg.nombre ; cont.nombre ; cont.email ; cont.celular """
+    conn = getConnection()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT["get_all_info"], (id,))
+    info = cursor.fetchone()
+    cursor.close()
+    return info
+
+def addComment(id, nombre, texto):
+    conn = getConnection()
+    cursor = conn.cursor()
+    fecha = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    cursor.execute(QUERY_DICT['add_comentario'], (nombre, texto, fecha, id))
+    conn.commit()
