@@ -66,4 +66,7 @@ def retrieve_uploads(id):
     upload2 = request.files.get(f"file-input-1-"+id)
     upload3 = request.files.get(f"file-input-2-"+id)
     print(upload1, "Upload 1 test")
-    return [a for a in [upload1,upload2,upload3] if a and a.filename != '']
+    uploads = [a for a in [upload1,upload2,upload3] if a and a.filename != '']
+    for up in uploads:
+        if not validate_conf_img(up): return []
+    return uploads
