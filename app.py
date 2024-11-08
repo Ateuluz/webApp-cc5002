@@ -85,14 +85,11 @@ def agregar_donacion():
 
 @app.route('/ver_dispositivos/<page>')
 def ver_dispositivos(page):
-    #TODO num
-    dispositivos = db.getDispositivos(int(page)*5,5)
+    num = 5
+    dispositivos = db.getDispositivos(int(page) * num, num + 1)  # Usaremos ese extra solo para saber si quedan
     
     data = []
-    
-    for i,disp in enumerate(dispositivos):
-        """ tipo; nombre_disp; estado; foto """
-        
+    for disp in dispositivos[:num]:
         ruta = db.getFileName(disp["id"])[0]['ruta_archivo']
         print(">>> Archivo on Ver_disp:", ruta)
         
@@ -106,9 +103,10 @@ def ver_dispositivos(page):
         }
         data.append(d)
     
-    nend = len(dispositivos) != 0
+    nend = len(dispositivos) > num
     
     return render_template('ver_dispositivos.html', page=int(page), dispositivos=data, nend=nend)
+
 
 @app.route('/informacion_dispositivo/<idx>', methods=['POST', 'GET'])
 def informacion_dispositivo(idx):
