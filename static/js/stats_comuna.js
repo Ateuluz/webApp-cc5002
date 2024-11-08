@@ -39,7 +39,7 @@ Highcharts.chart('container', {
         type: 'column'
     },
     title: {
-        text: 'Número de Contactos por comuna'
+        text: 'Número de Contactos por Comuna'
     },
     xAxis: {
         categories: []
@@ -50,7 +50,7 @@ Highcharts.chart('container', {
         }
     },
     series: [{
-        name: 'Dispositivos',
+        name: 'Contactos',
         data: [],
         showInLegend: true,
         dataLabels: {
