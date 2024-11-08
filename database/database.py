@@ -127,3 +127,27 @@ def addComment(id, nombre, texto):
     fecha = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cursor.execute(QUERY_DICT['add_comentario'], (nombre, texto, fecha, id))
     conn.commit()
+    
+def getComunaById(id):
+    conn = getConnection()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT['get_comuna_by_id'], (id,))
+    comuna = cursor.fetchone()
+    cursor.close()
+    return comuna
+    
+def getCountTp():
+    conn = getConnection()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT['get_count_tipo'])
+    data = cursor.fetchall()
+    cursor.close()
+    return data
+
+def getCountCm():
+    conn = getConnection()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT['get_count_comuna'])
+    data = cursor.fetchall()
+    cursor.close()
+    return data
