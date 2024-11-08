@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const validarComentario = () => {
         const comentario = document.getElementById('comment-input').value.trim();
         if(!comentario) return false;
-        let lengthValid = comentario.trim().length >= 3 && comentario.trim().length <= 200;
+        let lengthValid = comentario.trim().length >= 5 && comentario.trim().length <= 200;
         return lengthValid;
     }
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         if (!validarComentario()) {
-            alert('El comentario debe tener entre 3 y 200 caracteres.');
+            alert('El comentario debe tener entre 5 y 200 caracteres.');
             return;
         }
 

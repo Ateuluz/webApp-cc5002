@@ -12,5 +12,8 @@
     "get_dispositivos_n": "SELECT d.id, d.tipo, d.nombre, d.estado, cm.nombre AS comuna_name FROM dispositivo d JOIN contacto c ON d.contacto_id = c.id JOIN comuna cm ON c.comuna_id = cm.id ORDER BY d.id DESC LIMIT ",
     "get_dispositivos_u": "SELECT d.tipo, d.nombre, d.estado, cm.nombre AS comuna_name FROM dispositivo d JOIN contacto c ON d.contacto_id = c.id JOIN comuna cm ON c.comuna_id = cm.id WHERE d.id = %s ",
     "get_all_info": "SELECT d.id, d.nombre, d.tipo, d.descripcion, d.anos_uso, d.estado, com.nombre AS comuna_nombre, reg.nombre AS region_nombre, cont.nombre AS contacto_nombre, cont.email, cont.celular FROM dispositivo d JOIN contacto cont ON d.contacto_id = cont.id JOIN comuna com ON cont.comuna_id = com.id JOIN region reg ON com.region_id = reg.id WHERE d.id = %s",
-    "get_comments_for": "SELECT  c.nombre,  c.texto,  c.fecha FROM comentario c WHERE c.dispositivo_id = %s"
+    "get_comments_for": "SELECT  c.nombre,  c.texto,  c.fecha FROM comentario c WHERE c.dispositivo_id = %s",
+    "get_comuna_by_id": "SELECT nombre FROM comuna WHERE id = %s",
+    "get_count_tipo": "SELECT tipo, COUNT(tipo) FROM dispositivo GROUP BY tipo",
+    "get_count_comuna": "SELECT comuna_id, COUNT(comuna_id) FROM contacto GROUP BY comuna_id"
 }

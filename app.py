@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, session, jsonify
+from flask_cors import cross_origin
 from utils.validations import * #TODO
 from database import database as db
 from werkzeug.utils import secure_filename
@@ -144,6 +145,61 @@ def informacion_dispositivo(idx):
     
 
     return render_template("informacion_dispositivo.html", info=info, paths=paths, comments=comments)
+
+
+# -- Stats --
+
+@app.route('/stats_comuna', methods=['GET'])
+def stats_comuna():
+    return render_template("stats_comuna.html")
+
+
+# @app.route('/get_stats_comuna', methods=['GET'])
+# @cross_origin(origin="127.0.0.1", supports_credentials=True)
+# def get_stats_comuna():
+#     raw = db.getCountCm()
+#     print(raw)
+#     data = [(db.getComunaById(i['comuna_id'])['nombre'], i['COUNT(comuna_id)']) for i in raw]
+#     print("################################")
+#     print(data)
+#     return jsonify(data)
+
+@app.route('/get_stats_comuna', methods=['GET'])
+@cross_origin(origin="127.0.0.1", supports_credentials=True)
+def get_stats_comuna():
+    raw = db.getCountCm()
+    # print(raw)
+    
+    categories = []
+    series_data = []
+    
+    for i in raw:
+        comuna_name = db.getComunaById(i['comuna_id'])['nombre']
+        categories.append(comuna_name)
+        series_data.append(i['COUNT(comuna_id)'])
+    
+    # print("################################")
+    # print("Categories:", categories)
+    # print("Series Data:", series_data)
+
+    return jsonify({
+        'categories': categories,
+        'seriesData': series_data
+    })
+
+@app.route('/stats_tipo', methods=['GET'])
+def stats_tipo():
+    return render_template("stats_tipo.html")
+
+
+@app.route('/get_stats_tipo', methods=['GET'])
+@cross_origin(origin="127.0.0.1", supports_credentials=True)
+def get_stats_tipo():
+    raw = db.getCountTp()
+    # print(raw)
+    data = [(i['tipo'], i['COUNT(tipo)']) for i in raw]
+    # data = db.getCountTp()
+    return jsonify(data)
     
 
 if __name__ == '__main__':
